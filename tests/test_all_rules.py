@@ -10,8 +10,8 @@ from rules.handball_rules import evaluate_handball
 from rules.penalty_rules import evaluate_penalty
 from rules.var_rules import evaluate_var
 from rules.fouls_cards_rules import evaluate_foul_misconduct
-from chatbot.intent_classifier import IntentClassifier
-from chatbot.chatbot_engine import ChatbotEngine
+from chat.intent_classifier import IntentClassifier
+from chat.chatbot_engine import ChatbotEngine
 
 
 class TestOffsideRules(unittest.TestCase):
