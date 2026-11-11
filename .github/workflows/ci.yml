@@ -1,0 +1,63 @@
+name: Chatbot CI Pipeline
+
+on:
+  push:
+    branches: ["main", "master"]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+  pull_request:
+    branches: ["main", "master"]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+  workflow_dispatch:
+
+# Membatalkan run lama jika ada push baru di branch/PR yang sama
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Prinsip hak akses minimal (Least Privilege)
+permissions:
+  contents: read
+
+jobs:
+  quality-and-test:
+    name: Code Quality & Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pin Action menggunakan Commit SHA untuk keamanan Supply-Chain
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@42375524e23c412e93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: "3.10"
+          cache: "pip" # Caching otomatis untuk mempercepat build berikutnya
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then 
+            pip install -r requirements.txt
+          else 
+            pip install flask pdfplumber pypdf pytest
+          fi
+
+      - name: Linting & Syntax Check
+        run: |
+          pip install flake8
+          # Cek kesalahan sintaksis Python tanpa menghentikan build jika hanya style issue
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      - name: Run PDF Extraction
+        run: python scripts/extract_pdf.py
+
+      - name: Build Knowledge Base
+        run: python scripts/build_knowledge.py
+
+      - name: Run Unit Tests
+        run: python -m unittest tests/test_all_rules.py

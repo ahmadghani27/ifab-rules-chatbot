@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Penjelas Aturan Sepak Bola (IFAB)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <h2>⚽ WasitBot - Penjelas Aturan IFAB</h2>
+            <p>Tanyakan kebingungan Anda tentang Offside, Handball, Penalti, atau VAR!</p>
+        </div>
+
+        <!-- Chat Box Messages -->
+        <div class="chat-box" id="chatBox">
+            <div class="message bot-message">
+                Halo! Saya WasitBot. Ceritakan kejadian di lapangan yang bikin Anda bingung (misal: handball, offside, atau VAR), dan saya akan jelaskan aturan resminya!
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Ketik kejadian di lapangan..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Kirim</button>
+        </div>
+    </div>
+
+    <script href="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script>
+        async function sendMessage() {
+            const inputField = document.getElementById("userInput");
+            const chatBox = document.getElementById("chatBox");
+            const message = inputField.value.trim();
+
+            if (!message) return;
+
+            // Tampilkan pesan pengguna
+            chatBox.innerHTML += `<div class="message user-message">${message}</div>`;
+            inputField.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Efek Loading
+            const loadingId = "loading-" + Date.now();
+            chatBox.innerHTML += `<div class="message bot-message" id="${loadingId}"><i>WasitBot sedang memeriksa aturan IFAB...</i></div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                const response = await fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+                document.getElementById(loadingId).remove();
+
+                // Format teks (mengubah markdown bold ** ke html <b>)
+                let formattedResponse = data.response.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+                formattedResponse = formattedResponse.replace(/\n/g, '<br>');
+
+                chatBox.innerHTML += `<div class="message bot-message">${formattedResponse}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                document.getElementById(loadingId).remove();
+                chatBox.innerHTML += `<div class="message bot-message error">Gagal terhubung ke server. Pastikan app.py berjalan.</div>`;
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>

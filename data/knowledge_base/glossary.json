@@ -1,0 +1,30 @@
+{
+  "synonyms": {
+    "DOGSO": [
+      "orang terakhir",
+      "pemain terakhir",
+      "ditarik pas mau gol",
+      "peluang emas"
+    ],
+    "SPA": [
+      "tarik baju",
+      "tackle dari belakang",
+      "potong serangan balik"
+    ],
+    "Advantage": [
+      "dibiarkan main",
+      "gak ditiup",
+      "main terus",
+      "keuntungan"
+    ],
+    "Encroachment": [
+      "nyelonong masuk",
+      "masuk kotak penalti duluan"
+    ],
+    "Handball": [
+      "kena tangan",
+      "tangan aktif",
+      "bola kena lengan"
+    ]
+  }
+}
