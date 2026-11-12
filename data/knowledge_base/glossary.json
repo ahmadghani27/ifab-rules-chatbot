@@ -1,30 +1,85 @@
 {
+  "law": "IFAB Football Glossary & Terminology",
   "synonyms": {
     "DOGSO": [
       "orang terakhir",
       "pemain terakhir",
       "ditarik pas mau gol",
-      "peluang emas"
+      "peluang emas",
+      "peluang gol",
+      "tarik striker"
     ],
     "SPA": [
       "tarik baju",
       "tackle dari belakang",
-      "potong serangan balik"
+      "potong serangan balik",
+      "serangan menjanjikan",
+      "pelanggaran taktis"
     ],
     "Advantage": [
       "dibiarkan main",
       "gak ditiup",
       "main terus",
-      "keuntungan"
+      "dikasih keuntungan",
+      "tidak peluit wasit"
     ],
     "Encroachment": [
       "nyelonong masuk",
-      "masuk kotak penalti duluan"
+      "masuk kotak penalti duluan",
+      "menerobos kotak penalti",
+      "lari duluan"
     ],
     "Handball": [
       "kena tangan",
       "tangan aktif",
-      "bola kena lengan"
+      "bola kena lengan",
+      "sentuh tangan",
+      "hansbal",
+      "handsball"
+    ],
+    "Offside": [
+      "ofsai",
+      "off side",
+      "off-side",
+      "posisi offside",
+      "ofset"
+    ],
+    "Penalty": [
+      "pinalti",
+      "titik putih",
+      "kotak 16",
+      "tendangan 12 pas"
     ]
-  }
+  },
+  "intents": [
+    {
+      "tag": "glossary_query",
+      "intent": "glossary_query",
+      "patterns": [
+        "apa arti dogso dalam sepak bola",
+        "istilah dogso artinya apa",
+        "apa maksud spa di sepak bola",
+        "arti encroachment penalti",
+        "apa itu aturan advantage wasit",
+        "kamus istilah peraturan sepak bola ifab",
+        "arti direct free kick dan indirect free kick",
+        "apa maksud handball dan offside",
+        "istilah sepak bola ifab"
+      ],
+      "required_slots": [],
+      "clarification_prompts": {},
+      "responses": {
+        "law_reference": "IFAB Football Glossary",
+        "decision": "Penjelasan Glosarium Istilah Resmi Sepak Bola",
+        "explanation": "Berikut glosarium istilah resmi regulasi IFAB:\n• DOGSO: Denial of an Obvious Goal-Scoring Opportunity (menggagalkan peluang emas mencetak gol, sanksi: Kartu Merah).\n• SPA: Stopping a Promising Attack (menghentikan serangan menjanjikan, sanksi: Kartu Kuning).\n• Encroachment: Pelanggaran memasuki area terlarang (seperti kotak penalti) sebelum bola resmi ditendang.\n• Advantage: Keuntungan yang diberikan wasit agar tim yang dilanggar tetap melanjutkan penguasaan bola.\n• Handling (Handball): Sentuhan bola yang melanggar aturan oleh tangan/lengan di bawah batas bawah ketiak.",
+        "conversational_intros": [
+          "Berikut rangkuman istilah resmi dalam regulasi sepak bola:",
+          "Kamus glosarium resmi IFAB mendefinisikannya sebagai berikut:"
+        ],
+        "restart": "Informasi regulasi umum IFAB.",
+        "rule_module": null,
+        "eval_func": null
+      }
+    }
+  ]
 }

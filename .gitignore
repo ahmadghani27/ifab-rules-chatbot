@@ -1,3 +1,6 @@
 .venv/
 .*/__pycache__/**/*
 .age
+.claude/
+powershell.exe
+.__pycache__
