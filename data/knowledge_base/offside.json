@@ -1,21 +1,98 @@
 {
   "law": "Law 11 - Offside",
   "raw_reference": "Law\n11\nOffside\n1. Offside position\nIt is not an offence to be in an offside position.\nA player is in an offside position if:\n• any part of the head, body or feet is in the opponents’ half (excluding the\nhalfway line) and\n• any part of the head, body or feet is nearer to the opponents’ goal line than\nboth the ball and the second-last opponent\nThe hands and arms of all players, including the goalkeepers, are not\nconsidered. For the purposes of determining offside, the upper boundary of the\narm is in line with the bottom of the armpit.\nA player is not in an offside position if level with the:\n• second-last opponent or\n• last two opponents\n2. Offside offence\nA player in an offside position at the moment the ball is played or touched*\nby a team-mate is only penalised on becoming involved in active play by:\n• interfering with play by playing or touching a ball passed or touched by\na team-mate or\n• i•nterfering with an opponent by:\npreventing an opponent from playing or being able to play the ball by\n•\nclearly obstructing the opponent’s line of vision or\n*Th e cfhirasltl epnoginint go fa nco onptapcotn oefn tth feo r‘p tlhaey’ boarl l‘ tooruch’ of the ball should be used;\nhowever, when the ball is thrown by the goalkeeper, the last point of contact\nshould be used.\nLaws of the Game 2026/27 | Law 11 | Offside 109\n•\nclearly attempting to play a ball which is close when this action impacts\n•\non an opponent or\nmaking an obvious action which clearly impacts on the ability of an\nor opponent to play the ball\n• gaining an advantage by playing the ball or interfering with an opponent\nw•hen it has:\nrebounded or been deflected off the goalpost, crossbar, match official or\n•\nan opponent\nbeen deliberately saved by any opponent\nA player in an offside position receiving the ball from an opponent who\ndeliberately played* the ball, including by deliberate handball, is not\nconsidered to have gained an advantage, unless it was a deliberate save by any\nopponent.\n*‘Deliberate play’ (excluding deliberate handball) is when a player has control\nof the ball with the possibility of:\n• passing the ball to a team-mate;\n• gaining possession of the ball; or\n• clearing the ball (e.g. by kicking or heading it)\nIf the pass, attempt to gain possession or clearance by the player in control of\nthe ball is inaccurate or unsuccessful, this does not negate the fact that the\nplayer ‘deliberately played’ the ball.\nThe following criteria should be used, as appropriate, as indicators that a\nplayer was in control of the ball and, as a result, can be considered to have\n‘deliberately played’ the ball:\n• The ball travelled from distance and the player had a clear view of it\n• The ball was not moving quickly\n• The direction of the ball was not unexpected\n• The player had time to coordinate their body movement, i.e. it was not a case\n110\nof instinctive stretching or jumping, or a movement that achieved limited\ncontact/control\n• A ball moving on the ground is easier to play than a ball in the air\nA ‘save’ is when a player stops, or attempts to stop, a ball which is going into or\nvery close to the goal with any part of the body except the hands/arms (unless\nthe goalkeeper within the penalty area).\nIn situations where:\n• a player moving from, or standing in, an offside position is in the way of an\nopponent and interferes with the movement of the opponent towards the ball,\nthis is an offside offence if it impacts on the ability of the opponent to play or\nchallenge for the ball; if the player moves into the way of an opponent and\nimpedes the opponent’s progress (e.g. blocks the opponent), the offence\nshould be penalised under Law 12\n• a player in an offside position is moving towards the ball with the intention of\nplaying the ball and is fouled before playing or attempting to play the ball,\nor challenging an opponent for the ball, the foul is penalised as it has occurred\nbefore the offside offence\n• an offence is committed against a player in an offside position who is already\nplaying or attempting to play the ball, or challenging an opponent for the ball,\n3. Not hoef foefnfsciede offence is penalised as it has occurred before the foul challenge\nThere is no offside offence if a player receives the ball directly from:\n• a goal kick\n• a throw-in\n• a corner kick\n4. Offences and sanctions\nIf an offside offence occurs, the referee awards an indirect free kick where the\noffence occurred, including if it is in the player’s own half of the field of play.\nA defending player who leaves the field of play without the referee’s\npermission will be considered to be on the goal line or touchline for the\nLaws of the Game 2026/27 | Law 11 | Offside 111\npurposes of offside until the next stoppage in play or until the defending team\nhas played the ball towards the halfway line and it is outside its penalty area. If\nthe player left the field of play deliberately, the player must be cautioned when\nthe ball is next out of play.\nAn attacking player may step or stay off the field of play not to be involved in\nactive play. If the player re-enters from the goal line and becomes involved in\nplay before the next stoppage in play or the defending team has played the\nball towards the halfway line and it is outside its penalty area, the player\nwill be considered to be positioned on the goal line for the purposes of offside.\nA player who deliberately leaves the field of play and re-enters without the\nreferee’s permission and is not penalised for offside and gains an advantage\nmust be cautioned.\nIf an attacking player remains stationary between the goalposts and inside\nthe goal as the ball enters the goal, a goal must be awarded unless the player\ncommits an offside offence or a Law 12 offence, in which case play is restarted\nwith an indirect or direct free kick.\n112\n113",
-  "rules": [
+  "intents": [
     {
-      "id": "offside_position",
-      "condition": "Pemain berada lebih dekat ke garis gawang lawan daripada bola dan pemain bertahan lawan kedua terakhir.",
-      "note": "Berada di posisi offside bukan merupakan pelanggaran."
+      "tag": "offside_exception",
+      "intent": "offside_exception",
+      "patterns": [
+        "apakah lemparan ke dalam bisa offside",
+        "apakah lemparan kedalam bisa offside",
+        "lemparan kedalam bisa offside",
+        "lemparan kedalam ofsai gak",
+        "lemparan ke dalam offside gak",
+        "apakah throw in bisa offside",
+        "offside dari throw in",
+        "lemparan out kena ofside gak",
+        "apakah tendangan gawang bisa offside",
+        "tendangan gawang kena offside gak",
+        "goal kick ofsai gak",
+        "offside dari goal kick",
+        "apakah corner kick bisa offside",
+        "sepak pojok kena offside gak",
+        "tendangan sudut kena ofset gak",
+        "offside dari sepak pojok",
+        "terima bola langsung dari lemparan ke dalam",
+        "terima bola langsung dari tendangan gawang",
+        "terima bola langsung dari corner kick"
+      ],
+      "required_slots": [
+        "restart_type"
+      ],
+      "clarification_prompts": {
+        "restart_type": "Apakah bola diterima langsung dari lemparan ke dalam (throw-in), tendangan gawang (goal kick), atau sepak pojok (corner kick)?"
+      },
+      "clarification_variants": [
+        "Biar jelas aturannya, bola tadi diterima langsung dari mana ya? Apakah lemparan ke dalam, tendangan gawang, atau sepak pojok?",
+        "Bisa dipastikan kembali situasi awalnya? Apakah dari lemparan dalam (throw-in), goal kick, atau corner kick?"
+      ],
+      "responses": {
+        "law_reference": "Law 11.3 IFAB - No Offside Offence (Exceptions)",
+        "decision": "Bukan Pelanggaran Offside (Permainan Berlanjut)",
+        "explanation": "Berdasarkan Law 11.3 IFAB, seorang pemain TIDAK PERNAH dinyatakan offside jika menerima bola langsung dari: Lemparan ke dalam (Throw-in), Tendangan gawang (Goal kick), atau Sepak pojok (Corner kick).",
+        "conversational_intros": [
+          "Tenang saja, situasi tersebut dipastikan aman dari offside!",
+          "Kabar baik untuk tim penyerang, momen ini sah menurut regulasi IFAB.",
+          "Berdasarkan pengecualian resmi Law 11 IFAB:"
+        ],
+        "restart": "Permainan berlanjut secara normal.",
+        "rule_module": "rules.offside_rules",
+        "eval_func": "evaluate_offside"
+      }
     },
     {
-      "id": "offside_offence",
-      "condition": "Pemain di posisi offside terlibat dalam permainan aktif (menyentuh bola, mengganggu lawan, atau mendapat keuntungan pantulan).",
-      "sanction": "Indirect Free Kick untuk lawan."
-    },
-    {
-      "id": "offside_exceptions",
-      "condition": "Pemain menerima bola langsung dari Throw-in, Goal Kick, atau Corner Kick.",
-      "sanction": "Bukan Pelanggaran Offside."
+      "tag": "offside_eval",
+      "intent": "offside_eval",
+      "patterns": [
+        "apakah posisi begini offside",
+        "kapan pemain dinyatakan offside",
+        "kenapa wasit tiup peluit offside",
+        "kenapa ofsai",
+        "kapan kena ofside",
+        "pemain mendahului bek terakhir offside gak",
+        "pemain pasif diam saja offside gak",
+        "pemain di posisi offside tapi tidak sentuh bola",
+        "terjebak offside di daerah pertahanan lawan",
+        "aturan offside sepak bola ifab",
+        "kapan offside aktif dan kapan pasif",
+        "di belakang bek terakhir kena ofset gak",
+        "terlibat permainan aktif offside",
+        "pemain offside menghalangi pandangan kiper"
+      ],
+      "required_slots": [
+        "player_position",
+        "action_type"
+      ],
+      "clarification_prompts": {
+        "player_position": "Apakah pemain berada lebih dekat ke garis gawang lawan daripada bola dan bek kedua terakhir (posisi offside) atau onside?",
+        "action_type": "Apakah pemain tersebut aktif memainkan bola / menghalangi lawan, atau hanya pasif diam?"
+      },
+      "clarification_variants": [
+        "Untuk menentukan offside, apakah pemain tadi bergerak aktif menyentuh/menghalangi bola atau hanya pasif diam?",
+        "Bisa diceritakan apakah pemain di depan tadi ikut mengejar bola atau sama sekali tidak mengganggu permainan lawan?"
+      ],
+      "responses": {
+        "law_reference": "Law 11.1 & 11.2 IFAB - Offside Position and Offence",
+        "decision": "Evaluasi Offside Berdasarkan Posisi dan Keterlibatan Aktif",
+        "explanation": "Berada di posisi offside bukanlah pelanggaran. Pelanggaran offside hanya terjadi jika pemain aktif terlibat dalam permainan (menyentuh bola, mengganggu pergerakan/pandangan lawan, atau memanfaatkan keuntungan pantulan).",
+        "conversational_intros": [
+          "Berikut penjelasan aturan offside berdasarkan posisi dan aksi pemain:",
+          "Kunci dari keputusan offside ada pada keterlibatan aktif pemain di lapangan:"
+        ],
+        "restart": "Indirect Free Kick (Tendangan Bebas Tidak Langsung) untuk tim lawan.",
+        "rule_module": "rules.offside_rules",
+        "eval_func": "evaluate_offside"
+      }
     }
   ]
 }

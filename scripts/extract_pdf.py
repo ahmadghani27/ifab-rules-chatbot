@@ -1,7 +1,6 @@
 import os
 import json
 import re
-import pdfplumber
 
 # Penentuan Path Otomatis berbasis struktur folder project
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,18 +8,40 @@ RAW_DATA_DIR = os.path.join(BASE_DIR, "data", "raw")
 PROCESSED_DATA_DIR = os.path.join(BASE_DIR, "data", "processed")
 OUTPUT_FILE = os.path.join(PROCESSED_DATA_DIR, "rules.json")
 
-def extract_text_from_pdf(pdf_path):
-    """Mengekstrak seluruh teks dari satu file PDF."""
+def extract_text_from_pdf(pdf_path: str) -> str:
+    """Mengekstrak seluruh teks dari satu file PDF menggunakan pdfplumber dengan fallback pypdf."""
     extracted_text = []
-    with pdfplumber.open(pdf_path) as pdf:
-        for page in pdf.pages:
+
+    # Coba dengan pdfplumber terlebih dahulu
+    try:
+        import pdfplumber
+        with pdfplumber.open(pdf_path) as pdf:
+            for page in pdf.pages:
+                text = page.extract_text()
+                if text:
+                    extracted_text.append(text)
+        if extracted_text:
+            return "\n".join(extracted_text)
+    except Exception as e:
+        print(f"    [Notice] pdfplumber fallback ke pypdf untuk {os.path.basename(pdf_path)}: {e}")
+
+    # Fallback ke pypdf
+    try:
+        from pypdf import PdfReader
+        reader = PdfReader(pdf_path)
+        for page in reader.pages:
             text = page.extract_text()
             if text:
                 extracted_text.append(text)
-    return "\n".join(extracted_text)
+        return "\n".join(extracted_text)
+    except Exception as e:
+        print(f"    [Error] Gagal ekstraksi teks dari {pdf_path}: {e}")
+        return ""
 
-def clean_extracted_text(text):
+def clean_extracted_text(text: str) -> str:
     """Pembersihan awal teks mentah hasil ekstraksi."""
+    if not text:
+        return ""
     # Menghapus spasi berlebih
     text = re.sub(r'[ \t]+', ' ', text)
     # Menghapus perulangan baris kosong berlebih
@@ -38,7 +59,7 @@ def main():
         return
 
     # Mengambil seluruh file PDF di folder data/raw/
-    pdf_files = [f for f in os.listdir(RAW_DATA_DIR) if f.endswith(".pdf")]
+    pdf_files = [f for f in os.listdir(RAW_DATA_DIR) if f.lower().endswith(".pdf")]
     
     if not pdf_files:
         print(f"[Warning] Tidak ada file PDF ditemukan di {RAW_DATA_DIR}")
@@ -46,7 +67,7 @@ def main():
 
     all_rules_data = {}
 
-    for pdf_file in pdf_files:
+    for pdf_file in sorted(pdf_files):
         file_key = os.path.splitext(pdf_file)[0]  # Misal: LAW11, VAR_Protocol, Glossary
         pdf_path = os.path.join(RAW_DATA_DIR, pdf_file)
         
